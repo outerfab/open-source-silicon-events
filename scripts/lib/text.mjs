@@ -1,4 +1,5 @@
-import { SITE_URL, SITE_NAME, REPO_URL, INTRO, TYPE_LABELS, eventUrl } from "./config.mjs";
+import { SITE_URL, SITE_NAME, REPO_URL, INTRO, TYPE_LABELS, eventUrl, speakerUrl } from "./config.mjs";
+import { speakerMarkdown } from "./speakers.mjs";
 import { rangeUtc, rangeLocal, utcDate } from "./time.mjs";
 
 export function where(e) {
@@ -34,7 +35,8 @@ export function eventMarkdown(e, { heading = 1 } = {}) {
   L.push(`- **Languages:** ${e.languages.join(", ")}`);
   L.push(`- **Organizers:** ${e.organizers.map((o) => o.name).join(", ")}`);
   L.push(`- **Responsible organizer:** ${e.responsibleOrganizer.name}${e.responsibleOrganizer.role ? ` (${e.responsibleOrganizer.role})` : ""}${e.responsibleOrganizer.url ? ", " + e.responsibleOrganizer.url : ""}`);
-  if (e.speakers?.length) L.push(`- **Speakers:** ${e.speakers.map((s) => s.name + (s.affiliation ? ` (${s.affiliation})` : "")).join(", ")}`);
+  const sp = e._speakers || e.speakers;
+  if (sp?.length) L.push(`- **Speakers:** ${sp.map((s) => s.name + (s.affiliation ? ` (${s.affiliation})` : "") + (s.talk ? `: "${s.talk}"` : "") + (s.speakerId ? ` <${speakerUrl({ id: s.speakerId })}>` : "")).join(", ")}`);
   if (e.topics?.length) L.push(`- **Topics:** ${e.topics.join(", ")}`);
   if (e.series) L.push(`- **Series:** ${e.series}`);
   L.push(`- **Source:** ${e.source.url} (verified ${e.lastVerified})`);
@@ -56,7 +58,7 @@ export function split(events, now) {
   return { upcoming, past };
 }
 
-export function llmsTxt(events, now) {
+export function llmsTxt(events, now, speakers = []) {
   const { upcoming, past } = split(events, now);
   const L = [
     `# ${SITE_NAME}`, "",
@@ -66,7 +68,11 @@ export function llmsTxt(events, now) {
     ...(upcoming.length ? upcoming.map(bullet) : ["No upcoming events are listed right now."]), "",
     "## Past events", "",
     ...(past.length ? past.map(bullet) : ["None yet."]), "",
+    "## Speakers", "",
+    ...(speakers.length ? speakers.map((s) => `- [${s.name}](${speakerUrl(s)})${[s.role, s.affiliation].filter(Boolean).length ? ": " + [s.role, s.affiliation].filter(Boolean).join(", ") : ""}`) : ["None yet."]), "",
     "## Machine-readable data", "",
+    `- [speakers.json](${SITE_URL}/speakers.json): all speaker profiles as one JSON array`,
+    `- [speaker.schema.json](${SITE_URL}/schema/speaker.schema.json): JSON Schema of a speaker`,
     `- [events.json](${SITE_URL}/events.json): all events as one JSON array`,
     `- [events.jsonld](${SITE_URL}/events.jsonld): schema.org ItemList of all events`,
     `- [events.ics](${SITE_URL}/events.ics): iCalendar feed of all events (subscribe in Apple, Google or any calendar app)`,
@@ -74,6 +80,7 @@ export function llmsTxt(events, now) {
     `- [event.schema.json](${SITE_URL}/schema/event.schema.json): JSON Schema of an event`,
     `- [sitemap.xml](${SITE_URL}/sitemap.xml)`, "",
     "## Contribute", "",
+    `- [Submit a speaker profile](${REPO_URL}/issues/new?template=speaker.yml): open an issue with the \`speaker\` label`,
     `- [Submit an event](${REPO_URL}/issues/new?template=event.yml): open an issue with the \`event\` label`,
     `- [Repository](${REPO_URL}): source, schema and contribution rules (AGENTS.md)`, "",
     "## Optional", "",
@@ -82,12 +89,14 @@ export function llmsTxt(events, now) {
   return L.join("\n");
 }
 
-export function llmsFullTxt(events, now) {
+export function llmsFullTxt(events, now, speakers = []) {
   const { upcoming, past } = split(events, now);
   const L = [`# ${SITE_NAME}`, "", `> ${INTRO}`, "", `Generated from ${events.length} event file(s). All timestamps are UTC.`, "", "## Upcoming events", ""];
   L.push(...(upcoming.length ? upcoming.flatMap((e) => [eventMarkdown(e, { heading: 3 }), "---", ""]) : ["No upcoming events are listed right now.", ""]));
   L.push("## Past events", "");
   L.push(...(past.length ? past.flatMap((e) => [eventMarkdown(e, { heading: 3 }), "---", ""]) : ["None yet.", ""]));
+  L.push("## Speakers", "");
+  L.push(...(speakers.length ? speakers.flatMap((s) => [speakerMarkdown(s, { heading: 3 }), "---", ""]) : ["None yet.", ""]));
   return L.join("\n");
 }
 export { utcDate };

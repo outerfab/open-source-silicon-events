@@ -1,6 +1,7 @@
 import { SITE_URL, SITE_NAME, REPO_URL, INTRO, TYPE_LABELS, STATUS_LABELS, eventUrl } from "./config.mjs";
 import { rangeUtc, rangeLocal } from "./time.mjs";
 import { itemListJsonLd, websiteJsonLd, eventJsonLd, scriptTag } from "./jsonld.mjs";
+import { speakerJsonLd } from "./speakers.mjs";
 
 export const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const link = (u, t) => `<a href="${esc(u)}" rel="noopener">${esc(t ?? u.replace(/^https?:\/\//, "").replace(/\/$/, ""))}</a>`;
@@ -36,7 +37,7 @@ const icsBtn = (e, base, cls = "") => `<a class="btn ${cls}" href="${base}events
 
 /** One tile in the overview. */
 export function tile(e) {
-  const search = [e.name, e.summary, e.type, e.mode, e.topics?.join(" "), e.series, e.location?.address.locality, e.location?.address.country, e.organizers.map((o) => o.name).join(" "), e.responsibleOrganizer.name].filter(Boolean).join(" ").toLowerCase();
+  const search = [e.name, e.summary, e.type, e.mode, e.topics?.join(" "), e.series, e.location?.address.locality, e.location?.address.country, e.organizers.map((o) => o.name).join(" "), e.responsibleOrganizer.name, (e._speakers || e.speakers || []).map((s) => s.name).join(" ")].filter(Boolean).join(" ").toLowerCase();
   return `<article class="tile s-${e.status}" id="tile-${e.id}" data-id="${e.id}" data-start="${e.start}" data-end="${e.end}" data-type="${e.type}" data-mode="${e.mode}" data-status="${e.status}" data-search="${esc(search)}">
 ${banner(e)}
 <div class="tile-body">
@@ -81,7 +82,7 @@ ${row("capacity", e.capacity ? String(e.capacity) : "")}
 ${row("languages", esc(e.languages.join(", ")))}
 ${row("organizers", e.organizers.map((o) => o.url ? link(o.url, o.name) : esc(o.name)).join(", "))}
 ${row("responsible", (e.responsibleOrganizer.url ? link(e.responsibleOrganizer.url, e.responsibleOrganizer.name) : esc(e.responsibleOrganizer.name)) + (e.responsibleOrganizer.role ? ` (${esc(e.responsibleOrganizer.role)})` : ""))}
-${row("speakers", (e.speakers || []).map((s) => (s.url ? link(s.url, s.name) : esc(s.name)) + (s.affiliation ? ` (${esc(s.affiliation)})` : "")).join(", "))}
+${row("speakers", (e._speakers || e.speakers || []).map((s) => (s.speakerId ? `<a href="${base}speakers/#${s.speakerId}">${esc(s.name)}</a>` : s.url ? link(s.url, s.name) : esc(s.name)) + (s.affiliation ? ` (${esc(s.affiliation)})` : "") + (s.talk ? `<br><em>${esc(s.talk)}</em>` : "")).join("<br>"))}
 ${row("topics", (e.topics || []).map((t) => `<span class="chip">${esc(t)}</span>`).join(" "))}
 ${row("code of conduct", e.codeOfConductUrl ? link(e.codeOfConductUrl) : "")}
 ${row("also on", (e.sameAs || []).map((u) => link(u)).join("<br>"))}
@@ -120,7 +121,7 @@ ${extra}${ld}
 
 const top = (base) => `<header class="top"><a class="brand" href="${base || "./"}" aria-label="${esc(SITE_NAME)}">${LOGO_INLINE}</a>
 <span class="crumb">open source silicon events</span>
-<nav><a href="${REPO_URL}/issues/new?template=event.yml" rel="noopener">submit an event</a><a href="${base}events.ics">subscribe</a><a href="${base}llms.txt">llms.txt</a><a href="${REPO_URL}" rel="noopener">github</a></nav></header>`;
+<nav><a href="${REPO_URL}/issues/new?template=event.yml" rel="noopener">submit an event</a><a href="${base}speakers/">speakers</a><a href="${base}events.ics">subscribe</a><a href="${base}llms.txt">llms.txt</a><a href="${REPO_URL}" rel="noopener">github</a></nav></header>`;
 
 const foot = (base) => `<footer class="foot"><p>All times are UTC. Event data is CC0, curated in the <a href="${REPO_URL}" rel="noopener">open repository</a>. Maintained by <a href="https://outerfab.com" rel="noopener">outerfab</a>.</p>
 <p><a href="${base}events.ics">events.ics</a> · <a href="${base}events.json">events.json</a> · <a href="${base}events.jsonld">events.jsonld</a> · <a href="${base}feed.xml">feed.xml</a> · <a href="${base}llms.txt">llms.txt</a> · <a href="${base}schema/event.schema.json">schema</a></p></footer>`;
@@ -173,6 +174,48 @@ ${detail(e, base)}
 <p class="back"><a href="${base}#${e.id}">← all events</a></p>
 </main>
 ${foot(base)}
+</body>
+</html>
+`;
+}
+
+const initials = (n) => n.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join("");
+
+function speakerCard(s) {
+  const sub = [s.role, s.affiliation].filter(Boolean).map(esc).join(" · ");
+  const evs = s._events.map(({ event, talk }) => `<li><a href="../events/${event.id}/">${esc(event.name)}</a> <span class="dim">${esc(event.start.slice(0, 10))}</span>${talk ? `<br><em>${esc(talk)}</em>` : ""}</li>`).join("");
+  return `<article class="speaker" id="${s.id}">
+<div class="avatar" aria-hidden="${s.image ? "false" : "true"}">${s.image ? `<img src="${esc(s.image.url)}" alt="${esc(s.image.alt)}" loading="lazy">` : esc(initials(s.name))}</div>
+<div class="speaker-body">
+<h2><a href="#${s.id}">${esc(s.name)}</a></h2>
+${sub ? `<p class="eyebrow">${sub}</p>` : ""}
+${s.bio ? `<p>${esc(s.bio)}</p>` : ""}
+${s.topics?.length ? `<div class="chips">${s.topics.map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div>` : ""}
+${s.links?.length ? `<p class="links">${s.links.map((l) => link(l.url, l.label)).join(" · ")}</p>` : ""}
+${evs ? `<h3>events</h3><ul class="speaker-events">${evs}</ul>` : ""}
+<p class="permalink"><a href="${esc(`${SITE_URL}/speakers/${s.id}.jsonld`)}">json-ld</a> · <a href="${SITE_URL}/speakers/${s.id}.json">json</a> · <span class="dim">verified ${esc(s.lastVerified)}</span> · ${link(s.source.url, "source")}</p>
+</div>
+</article>`;
+}
+
+export function speakersPage(speakers) {
+  const ld = scriptTag({ "@context": "https://schema.org", "@type": "ItemList", name: "Speakers · " + SITE_NAME, url: SITE_URL + "/speakers/", numberOfItems: speakers.length,
+    itemListElement: speakers.map((s, i) => ({ "@type": "ListItem", position: i + 1, item: speakerJsonLd(s, { context: false }) })) });
+  return `${head({ title: `Speakers · ${SITE_NAME}`, desc: "People who speak at open-source silicon events listed here.", canonical: SITE_URL + "/speakers/", base: "../", ld })}
+<body class="page">
+${top("../")}
+<main>
+<section class="hero">
+<div class="eyebrow">outerfab · community calendar</div>
+<h1>speakers</h1>
+<p>People who speak at the events in this calendar. Profiles contain public information only and are published with the speaker's consent.</p>
+</section>
+<section class="speakers">
+${speakers.length ? speakers.map(speakerCard).join("\n") : '<p class="empty">No speaker profiles yet.</p>'}
+</section>
+<p class="back"><a href="../">← all events</a></p>
+</main>
+${foot("../")}
 </body>
 </html>
 `;

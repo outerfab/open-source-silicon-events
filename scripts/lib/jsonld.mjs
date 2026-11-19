@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, eventUrl } from "./config.mjs";
+import { SITE_URL, SITE_NAME, eventUrl, speakerUrl } from "./config.mjs";
 
 const STATUS = {
   scheduled: "https://schema.org/EventScheduled",
@@ -44,7 +44,8 @@ export function eventJsonLd(e, { context = true } = {}) {
   j.organizer = e.organizers.map((o) => ({ "@type": "Organization", name: o.name, ...(o.url && { url: o.url }) }));
   const r = e.responsibleOrganizer;
   j.organizer.push({ "@type": "Person", name: r.name, jobTitle: r.role || "Responsible organizer", ...(r.url && { url: r.url }) });
-  if (e.speakers?.length) j.performer = e.speakers.map((s) => ({ "@type": "Person", name: s.name, ...(s.affiliation && { affiliation: { "@type": "Organization", name: s.affiliation } }), ...(s.url && { url: s.url }) }));
+  const sp = e._speakers || e.speakers;
+  if (sp?.length) j.performer = sp.map((s) => ({ "@type": "Person", ...(s.speakerId && { "@id": speakerUrl({ id: s.speakerId }) }), name: s.name, ...(s.affiliation && { affiliation: { "@type": "Organization", name: s.affiliation } }), ...(s.speakerId ? { url: speakerUrl({ id: s.speakerId }) } : s.url && { url: s.url }) }));
   j.inLanguage = e.languages.length === 1 ? e.languages[0] : e.languages;
   j.isAccessibleForFree = e.price.free;
   const offer = { "@type": "Offer", url: e.registration?.url || e.url, price: e.price.free ? 0 : e.price.minAmount, priceCurrency: e.price.currency || "EUR" };

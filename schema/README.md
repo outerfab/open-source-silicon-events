@@ -39,7 +39,7 @@ Times are always UTC with a trailing `Z`: `2026-12-05T09:00:00Z`.
 | `capacity` | no | Integer |
 | `organizers` | yes | List of `{name, url?}` |
 | `responsibleOrganizer` | yes | The one person personally responsible for the event: `{name, url?, role?}`. Public name and optional public page only |
-| `speakers` | no | List of `{name, affiliation?, url?}`. Public names only |
+| `speakers` | no | List of `{speakerId, talk?}` (profile in `speakers/`) or inline `{name, affiliation?, url?, talk?}`. Public names only |
 | `languages` | yes | BCP 47 tags, e.g. `en`, `zh-CN` |
 | `image` | no | `{url (https), alt}` |
 | `codeOfConductUrl`, `contactUrl` | no | Public pages only. No personal e-mail addresses in this public repo |
@@ -48,10 +48,31 @@ Times are always UTC with a trailing `Z`: `2026-12-05T09:00:00Z`.
 | `lastVerified` | yes | `YYYY-MM-DD` (UTC) |
 | `updated` | no | UTC timestamp of the last content change |
 
+## Speaker profiles
+
+`speaker.schema.json` describes `speakers/<uuid>.speaker.json` (flat folder, file name = `id`, unknown properties rejected, ids unique).
+An event lists a speaker either as `{speakerId, talk?}` (reference to a profile, the build fails if it does not exist) or inline as `{name, affiliation?, url?, talk?}`.
+
+| Field | Required | Description |
+|---|---|---|
+| `id` | yes | UUID v4, never changes |
+| `name` | yes | 2–140 characters |
+| `affiliation`, `role` | no | e.g. `Outerfab`, `Founder` |
+| `bio` | no | 10–400 characters, plain text, 1–3 factual sentences |
+| `links` | no | List of `{label, url}`, public pages only |
+| `image` | no | `{url (https), alt}` |
+| `topics` | no | Kebab-case tags |
+| `source` | yes | `{url, note?}` where the data was verified |
+| `lastVerified` | yes | `YYYY-MM-DD` (UTC) |
+
+Generated: `/speakers/` page, `/speakers.json`, `/speakers/<uuid>.json`, `/speakers/<uuid>.jsonld` (schema.org `Person`), a speakers section in `llms.txt` and `llms-full.txt`.
+For previews use `EVENTS_DIR=examples SPEAKERS_DIR=examples/speakers`.
+
 ## Consistency checks (beyond the schema)
 
 - Folder and file name match `start` and `id`.
 - No duplicate `id`.
+- Every `speakerId` exists in `speakers/`.
 - `rescheduled` needs `previousStart` and `previousEnd` that differ from the new times; `scheduled` must not have them.
 - `timezone` is a valid IANA zone.
 - Free events carry no amounts; `maxAmount ≥ minAmount`.

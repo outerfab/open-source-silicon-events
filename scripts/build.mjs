@@ -2,22 +2,26 @@
 // Usage: node scripts/build.mjs [--validate-only]
 import fs from "node:fs";
 import path from "node:path";
-import { ROOT, SITE_URL, SITE_NAME, OUT_DIR, EVENTS_DIR, REPO_URL, INTRO, eventUrl } from "./lib/config.mjs";
+import { ROOT, SITE_URL, SITE_NAME, OUT_DIR, EVENTS_DIR, REPO_URL, INTRO, eventUrl, speakerUrl } from "./lib/config.mjs";
 import { loadEvents } from "./lib/events.mjs";
+import { loadSpeakers, resolveSpeakers, speakerJsonLd } from "./lib/speakers.mjs";
 import { eventJsonLd, itemListJsonLd } from "./lib/jsonld.mjs";
 import { ics } from "./lib/ics.mjs";
 import { eventMarkdown, llmsTxt, llmsFullTxt } from "./lib/text.mjs";
-import { indexPage, eventPage, setLogo, esc } from "./lib/html.mjs";
+import { indexPage, eventPage, speakersPage, setLogo, esc } from "./lib/html.mjs";
 import { nowIso } from "./lib/time.mjs";
 
 const { events, errors } = loadEvents();
+const { speakers, errors: speakerErrors } = loadSpeakers();
+errors.push(...speakerErrors);
+if (!speakerErrors.length) errors.push(...resolveSpeakers(events, speakers));
 if (errors.length) {
-  console.error(`\n${errors.length} problem(s) in ${path.relative(ROOT, EVENTS_DIR)}/:\n`);
+  console.error(`\n${errors.length} problem(s) in ${path.relative(ROOT, EVENTS_DIR)}/ or speakers/:\n`);
   for (const e of errors) console.error("  ✗ " + e);
   console.error("");
   process.exit(1);
 }
-console.log(`✓ ${events.length} event(s) valid`);
+console.log(`✓ ${events.length} event(s) and ${speakers.length} speaker(s) valid`);
 if (process.argv.includes("--validate-only")) process.exit(0);
 
 const now = nowIso();
@@ -33,11 +37,12 @@ const json = (o) => JSON.stringify(o, null, 2) + "\n";
 fs.cpSync(path.join(ROOT, "site"), OUT_DIR, { recursive: true });
 setLogo(fs.readFileSync(path.join(ROOT, "site/assets/logo.svg"), "utf8"));
 fs.cpSync(path.join(ROOT, "schema/event.schema.json"), path.join(OUT_DIR, "schema/event.schema.json"));
+fs.cpSync(path.join(ROOT, "schema/speaker.schema.json"), path.join(OUT_DIR, "schema/speaker.schema.json"));
 
 // pages and per-event files
 write("index.html", indexPage(events));
 for (const e of events) {
-  const { _file, ...raw } = e;
+  const { _file, _speakers, ...raw } = e;
   const d = `events/${e.id}/`;
   write(d + "index.html", eventPage(e));
   write(d + "event.json", json(raw));
@@ -46,16 +51,25 @@ for (const e of events) {
   write(d + "event.md", eventMarkdown(e));
 }
 
+write("speakers/index.html", speakersPage(speakers));
+for (const s of speakers) {
+  const { _file, _events, ...raw } = s;
+  write(`speakers/${s.id}.json`, json(raw));
+  write(`speakers/${s.id}.jsonld`, json(speakerJsonLd(s)));
+}
+write("speakers.json", json(speakers.map(({ _file, _events, ...raw }) => ({ ...raw, url_canonical: speakerUrl(raw), events: _events.map(({ event, talk }) => ({ id: event.id, name: event.name, ...(talk && { talk }) })) }))));
+
 // aggregates
-write("events.json", json(events.map(({ _file, ...raw }) => ({ ...raw, url_canonical: eventUrl(raw) }))));
+write("events.json", json(events.map(({ _file, _speakers, ...raw }) => ({ ...raw, url_canonical: eventUrl(raw) }))));
 write("events.jsonld", json(itemListJsonLd(events)));
 write("events.ics", ics(events));
-write("llms.txt", llmsTxt(events, now));
-write("llms-full.txt", llmsFullTxt(events, now));
+write("llms.txt", llmsTxt(events, now, speakers));
+write("llms-full.txt", llmsFullTxt(events, now, speakers));
 
 const mod = (e) => e.updated || `${e.lastVerified}T00:00:00Z`;
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   [`<url><loc>${SITE_URL}/</loc><lastmod>${now}</lastmod></url>`,
+   `<url><loc>${SITE_URL}/speakers/</loc><lastmod>${now}</lastmod></url>`,
    ...events.map((e) => `<url><loc>${eventUrl(e)}</loc><lastmod>${mod(e)}</lastmod></url>`)].join("\n") + "\n</urlset>\n");
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 

@@ -5,12 +5,12 @@ import addFormats from "ajv-formats";
 import { ROOT, EVENTS_DIR } from "./config.mjs";
 import { ymKey } from "./time.mjs";
 
-function walk(dir) {
+function walk(dir, top = true) {
   const out = [];
   if (!fs.existsSync(dir)) return out;
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, ent.name);
-    if (ent.isDirectory()) out.push(...walk(p));
+    if (ent.isDirectory()) { if (!(top && ent.name === "speakers")) out.push(...walk(p, false)); }
     else out.push(p);
   }
   return out;

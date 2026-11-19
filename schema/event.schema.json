@@ -145,15 +145,27 @@
       }
     },
     "speakers": {
-      "description": "Public speaker names only. No contact data.",
+      "description": "Either a reference to a profile in speakers/ ({speakerId}) or an inline public name. Public names only, no contact data.",
       "type": "array",
       "items": {
-        "type": "object", "additionalProperties": false, "required": ["name"],
-        "properties": {
-          "name": { "type": "string", "maxLength": 140 },
-          "affiliation": { "type": "string", "maxLength": 140 },
-          "url": { "type": "string", "format": "uri", "pattern": "^https?://" }
-        }
+        "oneOf": [
+          {
+            "type": "object", "additionalProperties": false, "required": ["speakerId"],
+            "properties": {
+              "speakerId": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+              "talk": { "type": "string", "maxLength": 200 }
+            }
+          },
+          {
+            "type": "object", "additionalProperties": false, "required": ["name"],
+            "properties": {
+              "name": { "type": "string", "maxLength": 140 },
+              "affiliation": { "type": "string", "maxLength": 140 },
+              "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+              "talk": { "type": "string", "maxLength": 200 }
+            }
+          }
+        ]
       }
     },
     "languages": {

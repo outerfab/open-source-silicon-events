@@ -6,6 +6,7 @@ export const SITE_URL = (process.env.SITE_URL || "https://events.outerfab.com").
 export const SITE_NAME = "Open Source Silicon Events";
 export const REPO_URL = "https://github.com/outerfab/open-source-silicon-events";
 export const EVENTS_DIR = path.resolve(ROOT, process.env.EVENTS_DIR || "events");
+export const SPEAKERS_DIR = path.resolve(ROOT, process.env.SPEAKERS_DIR || "speakers");
 export const OUT_DIR = path.join(ROOT, "dist");
 export const INTRO =
   "A curated, open calendar of meetups, conferences, workshops, shuttle deadlines and other events around open-source silicon. All times are UTC.";
@@ -18,3 +19,4 @@ export const STATUS_LABELS = {
   scheduled: "scheduled", rescheduled: "rescheduled", postponed: "postponed", cancelled: "cancelled"
 };
 export const eventUrl = (e) => `${SITE_URL}/events/${e.id}/`;
+export const speakerUrl = (s) => `${SITE_URL}/speakers/#${s.id}`;

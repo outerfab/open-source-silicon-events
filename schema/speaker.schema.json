@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://events.outerfab.com/schema/speaker.schema.json",
+  "title": "Speaker",
+  "description": "A speaker profile. Public information only, published with the speaker's consent. No e-mail address, phone number or home address.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "source", "lastVerified"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", "description": "Lowercase UUID v4. Never changes. Events reference it as speakerId." },
+    "name": { "type": "string", "minLength": 2, "maxLength": 140 },
+    "affiliation": { "type": "string", "maxLength": 140 },
+    "role": { "type": "string", "maxLength": 140, "description": "Job title or role, e.g. Founder." },
+    "bio": { "type": "string", "minLength": 10, "maxLength": 400, "description": "One to three factual sentences, plain text." },
+    "links": {
+      "type": "array", "maxItems": 10,
+      "description": "Public pages of or about the speaker.",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["label", "url"],
+        "properties": {
+          "label": { "type": "string", "maxLength": 40, "description": "e.g. website, github, mastodon, linkedin" },
+          "url": { "type": "string", "format": "uri", "pattern": "^https?://" }
+        }
+      }
+    },
+    "image": {
+      "type": "object", "additionalProperties": false, "required": ["url", "alt"],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "alt": { "type": "string", "maxLength": 200 }
+      }
+    },
+    "topics": { "type": "array", "maxItems": 15, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" } },
+    "source": {
+      "type": "object", "additionalProperties": false, "required": ["url"],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+        "note": { "type": "string", "maxLength": 300 }
+      }
+    },
+    "lastVerified": { "type": "string", "format": "date" }
+  }
+}
