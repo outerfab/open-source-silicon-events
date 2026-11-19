@@ -1,0 +1,76 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "id": "9e3aaaed-657f-4bb0-8c0d-db0ea9d1b2c3",
+  "name": "1st Shenzhen Open Source Silicon Meetup",
+  "summary": "The kickoff meetup of the SZOSS series: an afternoon of technical exchange, silicon demos and conversation with researchers, open-source contributors and Shenzhen's hardware community.",
+  "description": "First event of the SZOSS (Shenzhen Open Source Silicon) series, also known as 首届深圳开源芯片交流会.\n\nTopics include open tools, PDKs and shared fabrication routes; connecting chip layouts to boards and working hardware; and research, education and collaboration across the open-silicon community.\n\nThe venue is small, so the group is kept small. Registration is required and attendees are asked to say what they are working on.",
+  "type": "meetup",
+  "topics": [
+    "community",
+    "pdk",
+    "post-fab",
+    "education"
+  ],
+  "series": "SZOSS",
+  "status": "scheduled",
+  "revision": 0,
+  "start": "2026-11-11T08:00:00Z",
+  "end": "2026-11-11T11:00:00Z",
+  "timezone": "Asia/Shanghai",
+  "mode": "in-person",
+  "location": {
+    "name": "Chaihuo Maker Space",
+    "address": {
+      "street": "B622, Design Commune (万科云设计公社), Dashi 2nd Road, Nanshan District",
+      "locality": "Shenzhen",
+      "region": "Guangdong",
+      "postalCode": "518000",
+      "country": "CN"
+    }
+  },
+  "url": "https://outerfab.com/events/szoss/",
+  "registration": {
+    "required": true
+  },
+  "price": {
+    "free": true
+  },
+  "organizers": [
+    {
+      "name": "Outerfab",
+      "url": "https://outerfab.com"
+    }
+  ],
+  "sponsors": [
+    {
+      "name": "Chaihuo Maker Space",
+      "url": "https://www.chaihuo.org/space/list",
+      "role": "location sponsor"
+    }
+  ],
+  "responsibleOrganizer": {
+    "name": "Stuart Childs"
+  },
+  "speakers": [
+    {
+      "speakerId": "e92aa9be-6beb-4296-bda7-d49739a84601"
+    },
+    {
+      "speakerId": "a81c6ac0-ae5d-4311-87a5-a643b9f9f90e"
+    },
+    {
+      "speakerId": "d6201cfd-ae56-489e-aa14-84b297364adb"
+    },
+    {
+      "speakerId": "9168a8ef-7a15-4825-85c4-43081d5c01ac"
+    }
+  ],
+  "languages": [
+    "en"
+  ],
+  "source": {
+    "url": "https://outerfab.com/events/szoss/",
+    "note": "Date, time, venue, organizer, registration and speakers are from the event page. Price (free) and language (en) are not stated on the page; they were confirmed by the organizer team. The street address is from https://wiki.hackerspaces.org/Chaihuo and is not on the event page."
+  },
+  "lastVerified": "2026-11-19"
+}
