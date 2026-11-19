@@ -81,6 +81,7 @@ ${row("price", price + (e.price.note ? `<br>${esc(e.price.note)}` : ""))}
 ${row("capacity", e.capacity ? String(e.capacity) : "")}
 ${row("languages", esc(e.languages.join(", ")))}
 ${row("organizers", e.organizers.map((o) => o.url ? link(o.url, o.name) : esc(o.name)).join(", "))}
+${row("sponsors", (e.sponsors || []).map((s) => (s.url ? link(s.url, s.name) : esc(s.name)) + (s.role ? ` (${esc(s.role)})` : "")).join(", "))}
 ${row("responsible", (e.responsibleOrganizer.url ? link(e.responsibleOrganizer.url, e.responsibleOrganizer.name) : esc(e.responsibleOrganizer.name)) + (e.responsibleOrganizer.role ? ` (${esc(e.responsibleOrganizer.role)})` : ""))}
 ${row("speakers", (e._speakers || e.speakers || []).map((s) => (s.speakerId ? `<a href="${base}speakers/#${s.speakerId}">${esc(s.name)}</a>` : s.url ? link(s.url, s.name) : esc(s.name)) + (s.affiliation ? ` (${esc(s.affiliation)})` : "") + (s.talk ? `<br><em>${esc(s.talk)}</em>` : "")).join("<br>"))}
 ${row("topics", (e.topics || []).map((t) => `<span class="chip">${esc(t)}</span>`).join(" "))}

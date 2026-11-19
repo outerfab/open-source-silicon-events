@@ -135,6 +135,18 @@
         }
       }
     },
+    "sponsors": {
+      "description": "Optional sponsors or supporters, e.g. a location sponsor.",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "maxLength": 140 },
+          "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+          "role": { "type": "string", "maxLength": 80 }
+        }
+      }
+    },
     "responsibleOrganizer": {
       "description": "The one person who is personally responsible for this event. Public name and optional public page only; no e-mail address or phone number.",
       "type": "object", "additionalProperties": false, "required": ["name"],

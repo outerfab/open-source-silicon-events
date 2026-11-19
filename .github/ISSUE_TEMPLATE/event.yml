@@ -55,6 +55,9 @@ body:
     attributes: { label: Organizers (name and URL) }
     validations: { required: true }
   - type: input
+    id: sponsors
+    attributes: { label: Sponsors, description: "Optional. Name, URL and role, e.g. location sponsor." }
+  - type: input
     id: responsible
     attributes:
       label: Who is personally responsible for this event?

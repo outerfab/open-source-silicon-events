@@ -70,5 +70,12 @@
     }
   ],
   "capacity": 60,
-  "id": "50a43992-a1f3-427e-9cc4-47d756f6e3a7"
+  "id": "50a43992-a1f3-427e-9cc4-47d756f6e3a7",
+  "sponsors": [
+    {
+      "name": "Example Maker Space",
+      "url": "https://example.org/space",
+      "role": "location sponsor"
+    }
+  ]
 }

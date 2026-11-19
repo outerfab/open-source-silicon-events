@@ -34,6 +34,7 @@ export function eventMarkdown(e, { heading = 1 } = {}) {
   L.push(`- **Price:** ${priceText(e.price)}`);
   L.push(`- **Languages:** ${e.languages.join(", ")}`);
   L.push(`- **Organizers:** ${e.organizers.map((o) => o.name).join(", ")}`);
+  if (e.sponsors?.length) L.push(`- **Sponsors:** ${e.sponsors.map((s) => s.name + (s.role ? ` (${s.role})` : "") + (s.url ? `, ${s.url}` : "")).join("; ")}`);
   L.push(`- **Responsible organizer:** ${e.responsibleOrganizer.name}${e.responsibleOrganizer.role ? ` (${e.responsibleOrganizer.role})` : ""}${e.responsibleOrganizer.url ? ", " + e.responsibleOrganizer.url : ""}`);
   const sp = e._speakers || e.speakers;
   if (sp?.length) L.push(`- **Speakers:** ${sp.map((s) => s.name + (s.affiliation ? ` (${s.affiliation})` : "") + (s.talk ? `: "${s.talk}"` : "") + (s.speakerId ? ` <${speakerUrl({ id: s.speakerId })}>` : "")).join(", ")}`);

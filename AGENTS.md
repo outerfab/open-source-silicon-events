@@ -45,7 +45,7 @@ Changes, reschedules and cancellations arrive with the labels `event` and `event
    **Ask, but optional**
    11. Is registration required? Link, opening and closing time (UTC).
    12. Is there a call for proposals? Link and deadline (UTC).
-   13. Speakers (public names, affiliation; with a profile in `speakers/` if they consent, see "Adding a speaker"), series name, capacity, code of conduct URL, other pages of the same event (`sameAs`), image URL with alt text.
+   13. Sponsors or location sponsor (name, URL, role), speakers (public names, affiliation; with a profile in `speakers/` if they consent, see "Adding a speaker"), series name, capacity, code of conduct URL, other pages of the same event (`sameAs`), image URL with alt text.
    14. Topics as kebab-case tags (see `schema/README.md`).
    15. A longer description (plain text, paragraphs separated by a blank line).
 

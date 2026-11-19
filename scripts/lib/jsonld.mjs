@@ -42,6 +42,7 @@ export function eventJsonLd(e, { context = true } = {}) {
   if (e.onlineUrl) locs.push({ "@type": "VirtualLocation", url: e.onlineUrl });
   if (locs.length) j.location = locs.length === 1 ? locs[0] : locs;
   j.organizer = e.organizers.map((o) => ({ "@type": "Organization", name: o.name, ...(o.url && { url: o.url }) }));
+  if (e.sponsors?.length) j.sponsor = e.sponsors.map((s) => ({ "@type": "Organization", name: s.name, ...(s.url && { url: s.url }) }));
   const r = e.responsibleOrganizer;
   j.organizer.push({ "@type": "Person", name: r.name, jobTitle: r.role || "Responsible organizer", ...(r.url && { url: r.url }) });
   const sp = e._speakers || e.speakers;
