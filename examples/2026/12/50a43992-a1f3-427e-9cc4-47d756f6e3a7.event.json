@@ -1,0 +1,65 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "revision": 0,
+  "languages": [
+    "en"
+  ],
+  "price": {
+    "free": true
+  },
+  "source": {
+    "url": "https://example.org/source",
+    "note": "Fictional example event, not real."
+  },
+  "lastVerified": "2026-11-19",
+  "organizers": [
+    {
+      "name": "Example Silicon Community",
+      "url": "https://example.org"
+    }
+  ],
+  "registration": {
+    "required": true,
+    "url": "https://example.org/meetup-1/register",
+    "closesAt": "2026-12-04T16:00:00Z"
+  },
+  "name": "Example: Silicon Meetup Shenzhen #1",
+  "summary": "Fictional example of an in-person meetup, used to preview the layout of this site.",
+  "description": "This entry only exists in the examples/ folder and is never published.\n\nIt shows a multi-paragraph description, a venue with coordinates and a UTC start with local time at the venue.",
+  "type": "meetup",
+  "topics": [
+    "sky130",
+    "post-fab",
+    "community"
+  ],
+  "series": "Example Meetup",
+  "status": "scheduled",
+  "start": "2026-12-05T11:00:00Z",
+  "end": "2026-12-05T14:30:00Z",
+  "timezone": "Asia/Shanghai",
+  "mode": "in-person",
+  "location": {
+    "name": "Example Maker Space",
+    "address": {
+      "street": "1 Example Road",
+      "locality": "Shenzhen",
+      "region": "Guangdong",
+      "postalCode": "518000",
+      "country": "CN"
+    },
+    "geo": {
+      "lat": 22.5431,
+      "lon": 114.0579
+    }
+  },
+  "url": "https://example.org/meetup-1",
+  "speakers": [
+    {
+      "name": "Ada Example",
+      "affiliation": "Example Labs",
+      "url": "https://example.org/ada"
+    }
+  ],
+  "capacity": 60,
+  "id": "50a43992-a1f3-427e-9cc4-47d756f6e3a7"
+}

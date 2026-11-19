@@ -1,0 +1,47 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "revision": 2,
+  "languages": [
+    "en"
+  ],
+  "price": {
+    "free": true
+  },
+  "source": {
+    "url": "https://example.org/source",
+    "note": "Fictional example event, not real."
+  },
+  "lastVerified": "2026-11-19",
+  "organizers": [
+    {
+      "name": "Example Silicon Community",
+      "url": "https://example.org"
+    }
+  ],
+  "registration": {
+    "required": false
+  },
+  "name": "Example: Community Hackathon",
+  "summary": "Fictional hackathon that has been cancelled; the whole tile carries a red bar.",
+  "type": "hackathon",
+  "topics": [
+    "community"
+  ],
+  "status": "cancelled",
+  "statusNote": "Cancelled due to low registration numbers.",
+  "updated": "2026-11-17T10:00:00Z",
+  "start": "2026-12-19T08:00:00Z",
+  "end": "2026-12-20T18:00:00Z",
+  "timezone": "America/Los_Angeles",
+  "mode": "in-person",
+  "location": {
+    "name": "Example Hall",
+    "address": {
+      "locality": "San Francisco",
+      "region": "CA",
+      "country": "US"
+    }
+  },
+  "url": "https://example.org/hack",
+  "id": "1efcceb0-62c3-491b-8dbd-52c2c905d647"
+}

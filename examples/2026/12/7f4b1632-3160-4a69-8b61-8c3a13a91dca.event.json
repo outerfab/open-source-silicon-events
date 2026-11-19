@@ -1,0 +1,39 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "revision": 0,
+  "languages": [
+    "en"
+  ],
+  "price": {
+    "free": true
+  },
+  "source": {
+    "url": "https://example.org/source",
+    "note": "Fictional example event, not real."
+  },
+  "lastVerified": "2026-11-19",
+  "organizers": [
+    {
+      "name": "Example Silicon Community",
+      "url": "https://example.org"
+    }
+  ],
+  "registration": {
+    "required": false
+  },
+  "name": "Example: Shuttle Submission Deadline",
+  "summary": "Fictional tapeout deadline, modelled as a short event so that it appears in calendars.",
+  "type": "tapeout-deadline",
+  "topics": [
+    "mpw",
+    "tiny-tapeout"
+  ],
+  "status": "scheduled",
+  "start": "2026-12-31T23:00:00Z",
+  "end": "2026-12-31T23:59:00Z",
+  "timezone": "UTC",
+  "mode": "online",
+  "onlineUrl": "https://example.org/shuttle",
+  "url": "https://example.org/shuttle",
+  "id": "7f4b1632-3160-4a69-8b61-8c3a13a91dca"
+}

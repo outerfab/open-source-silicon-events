@@ -1,0 +1,73 @@
+name: New event
+description: Suggest an open-source silicon event for the calendar
+title: "Event: "
+labels: ["event"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! This repository is public. Please add only public information and no personal contact data.
+        **All times in UTC.** If you only know the local time, add the local time and place in the notes and a maintainer will convert it.
+  - type: input
+    id: name
+    attributes: { label: Event name, placeholder: "Example Silicon Meetup #1" }
+    validations: { required: true }
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options: [conference, trade-show, meetup, workshop, hackathon, webinar, course, competition, tapeout-deadline, community-call, other]
+    validations: { required: true }
+  - type: input
+    id: url
+    attributes: { label: Official event page, placeholder: "https://" }
+    validations: { required: true }
+  - type: input
+    id: start
+    attributes: { label: Start (UTC), placeholder: "2026-12-05 09:00 UTC" }
+    validations: { required: true }
+  - type: input
+    id: end
+    attributes: { label: End (UTC), placeholder: "2026-12-05 17:00 UTC" }
+    validations: { required: true }
+  - type: input
+    id: timezone
+    attributes: { label: Time zone of the venue (IANA name), placeholder: "Asia/Shanghai" }
+    validations: { required: true }
+  - type: dropdown
+    id: mode
+    attributes: { label: Mode, options: [in-person, online, hybrid] }
+    validations: { required: true }
+  - type: textarea
+    id: place
+    attributes:
+      label: Venue and city, or join link
+      description: Venue name, street, city, country (ISO code, e.g. CN) and/or the online link.
+    validations: { required: true }
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences.
+    validations: { required: true }
+  - type: input
+    id: organizers
+    attributes: { label: Organizers (name and URL) }
+    validations: { required: true }
+  - type: input
+    id: languages
+    attributes: { label: Language(s), placeholder: "en" }
+    validations: { required: true }
+  - type: input
+    id: price
+    attributes: { label: Price, placeholder: "free, or e.g. 120-380 EUR" }
+    validations: { required: true }
+  - type: input
+    id: source
+    attributes: { label: Where did you verify this information?, placeholder: "https://" }
+    validations: { required: true }
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Registration link and deadline, call for proposals, speakers, topics, code of conduct, capacity, notes.

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "revision": 1,
+  "languages": [
+    "en"
+  ],
+  "price": {
+    "free": true
+  },
+  "source": {
+    "url": "https://example.org/source",
+    "note": "Fictional example event, not real."
+  },
+  "lastVerified": "2026-11-19",
+  "organizers": [
+    {
+      "name": "Example Silicon Community",
+      "url": "https://example.org"
+    }
+  ],
+  "registration": {
+    "required": false
+  },
+  "name": "Example: Spring Summit",
+  "summary": "Fictional summit that was postponed without a new date, so the original date stays struck through.",
+  "type": "conference",
+  "status": "postponed",
+  "statusNote": "Postponed, a new date will be announced.",
+  "updated": "2026-11-10T10:00:00Z",
+  "start": "2027-03-20T08:00:00Z",
+  "end": "2027-03-21T17:00:00Z",
+  "timezone": "Europe/London",
+  "mode": "in-person",
+  "location": {
+    "name": "Example Hall",
+    "address": {
+      "locality": "London",
+      "country": "GB"
+    }
+  },
+  "url": "https://example.org/summit",
+  "id": "eb09b74b-fe85-499e-b1e6-9147081548a2"
+}

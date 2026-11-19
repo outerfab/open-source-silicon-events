@@ -1,0 +1,60 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "revision": 0,
+  "languages": [
+    "en",
+    "de"
+  ],
+  "price": {
+    "free": false,
+    "currency": "EUR",
+    "minAmount": 120,
+    "maxAmount": 380,
+    "note": "Student tickets available."
+  },
+  "source": {
+    "url": "https://example.org/source",
+    "note": "Fictional example event, not real."
+  },
+  "lastVerified": "2026-11-19",
+  "organizers": [
+    {
+      "name": "Example Silicon Community",
+      "url": "https://example.org"
+    }
+  ],
+  "registration": {
+    "required": true,
+    "url": "https://example.org/conf/tickets",
+    "opensAt": "2026-11-01T09:00:00Z"
+  },
+  "name": "Example: Open Silicon Conference",
+  "summary": "Fictional three-day hybrid conference with a call for proposals and a paid ticket.",
+  "description": "Hybrid events need a venue and an online URL.",
+  "type": "conference",
+  "topics": [
+    "openroad",
+    "analog",
+    "digital"
+  ],
+  "status": "scheduled",
+  "start": "2027-02-10T08:00:00Z",
+  "end": "2027-02-12T17:00:00Z",
+  "timezone": "Europe/Berlin",
+  "mode": "hybrid",
+  "location": {
+    "name": "Example Congress Center",
+    "address": {
+      "locality": "Berlin",
+      "country": "DE"
+    }
+  },
+  "onlineUrl": "https://example.org/conf/stream",
+  "url": "https://example.org/conf",
+  "cfp": {
+    "url": "https://example.org/conf/cfp",
+    "deadline": "2026-12-20T23:59:00Z",
+    "note": "Talks of 25 minutes."
+  },
+  "id": "dac720aa-d9d2-495a-80f8-63245ef372e0"
+}

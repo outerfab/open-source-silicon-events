@@ -1,0 +1,56 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "revision": 1,
+  "languages": [
+    "en"
+  ],
+  "price": {
+    "free": true
+  },
+  "source": {
+    "url": "https://example.org/source",
+    "note": "Fictional example event, not real."
+  },
+  "lastVerified": "2026-11-19",
+  "organizers": [
+    {
+      "name": "Example Silicon Community",
+      "url": "https://example.org"
+    }
+  ],
+  "registration": {
+    "required": false
+  },
+  "name": "Example: Packaging Workshop",
+  "summary": "Fictional workshop that was moved to a new date; the old date is struck through in red.",
+  "type": "workshop",
+  "topics": [
+    "packaging",
+    "post-fab"
+  ],
+  "status": "rescheduled",
+  "statusNote": "Moved because the venue was double-booked.",
+  "updated": "2026-11-18T09:00:00Z",
+  "previousStart": "2026-12-12T08:00:00Z",
+  "previousEnd": "2026-12-12T16:00:00Z",
+  "start": "2027-01-16T08:00:00Z",
+  "end": "2027-01-16T16:00:00Z",
+  "timezone": "Asia/Shanghai",
+  "mode": "in-person",
+  "location": {
+    "name": "Example Maker Space",
+    "address": {
+      "street": "1 Example Road",
+      "locality": "Shenzhen",
+      "region": "Guangdong",
+      "postalCode": "518000",
+      "country": "CN"
+    },
+    "geo": {
+      "lat": 22.5431,
+      "lon": 114.0579
+    }
+  },
+  "url": "https://example.org/packaging",
+  "id": "1d61d6ab-2004-464f-b0b0-966e27cac24d"
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "revision": 0,
+  "languages": [
+    "en"
+  ],
+  "price": {
+    "free": true
+  },
+  "source": {
+    "url": "https://example.org/source",
+    "note": "Fictional example event, not real."
+  },
+  "lastVerified": "2026-11-19",
+  "organizers": [
+    {
+      "name": "Example Silicon Community",
+      "url": "https://example.org"
+    }
+  ],
+  "registration": {
+    "required": false
+  },
+  "name": "Example: Tapeout Basics Webinar",
+  "summary": "Fictional online webinar for first-time designers, starting in the evening in Asia.",
+  "type": "webinar",
+  "topics": [
+    "tiny-tapeout",
+    "education"
+  ],
+  "status": "scheduled",
+  "start": "2026-12-10T12:00:00Z",
+  "end": "2026-12-10T13:00:00Z",
+  "timezone": "Asia/Kolkata",
+  "mode": "online",
+  "onlineUrl": "https://example.org/webinar",
+  "url": "https://example.org/webinar-info",
+  "id": "972090fc-196f-454d-b3c6-72d4e9e02e34"
+}

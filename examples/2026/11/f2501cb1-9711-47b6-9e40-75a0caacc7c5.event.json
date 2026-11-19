@@ -1,0 +1,48 @@
+{
+  "$schema": "https://events.outerfab.com/schema/event.schema.json",
+  "revision": 0,
+  "languages": [
+    "en"
+  ],
+  "price": {
+    "free": true
+  },
+  "source": {
+    "url": "https://example.org/source",
+    "note": "Fictional example event, not real."
+  },
+  "lastVerified": "2026-11-19",
+  "organizers": [
+    {
+      "name": "Example Silicon Community",
+      "url": "https://example.org"
+    }
+  ],
+  "registration": {
+    "required": false
+  },
+  "name": "Example: Past Meetup",
+  "summary": "Fictional meetup in the past, shown under the past filter.",
+  "type": "meetup",
+  "status": "scheduled",
+  "start": "2026-11-05T12:00:00Z",
+  "end": "2026-11-05T14:00:00Z",
+  "timezone": "Asia/Shanghai",
+  "mode": "in-person",
+  "location": {
+    "name": "Example Maker Space",
+    "address": {
+      "street": "1 Example Road",
+      "locality": "Shenzhen",
+      "region": "Guangdong",
+      "postalCode": "518000",
+      "country": "CN"
+    },
+    "geo": {
+      "lat": 22.5431,
+      "lon": 114.0579
+    }
+  },
+  "url": "https://example.org/past",
+  "id": "f2501cb1-9711-47b6-9e40-75a0caacc7c5"
+}

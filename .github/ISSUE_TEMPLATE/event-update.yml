@@ -1,0 +1,28 @@
+name: Change, reschedule or cancel an event
+description: Report that a listed event has changed
+title: "Update: "
+labels: ["event", "event-update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please include a link to an official announcement. **All times in UTC.**
+  - type: input
+    id: event
+    attributes: { label: Event page or UUID, placeholder: "https://events.outerfab.com/events/<uuid>/" }
+    validations: { required: true }
+  - type: dropdown
+    id: kind
+    attributes: { label: What happened?, options: [rescheduled (new date known), postponed (no new date), cancelled, correction (typo / wrong data), back on] }
+    validations: { required: true }
+  - type: input
+    id: newdates
+    attributes: { label: New start and end (UTC), description: Only for rescheduled events., placeholder: "2027-01-16 08:00 UTC to 2027-01-16 16:00 UTC" }
+  - type: textarea
+    id: details
+    attributes: { label: Details and reason }
+    validations: { required: true }
+  - type: input
+    id: source
+    attributes: { label: Official announcement, placeholder: "https://" }
+    validations: { required: true }
