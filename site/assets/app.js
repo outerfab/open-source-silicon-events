@@ -3,7 +3,11 @@
   const grid = $("#grid"), tiles = [...grid.querySelectorAll(".tile")];
   const q = $("#q"), fType = $("#f-type"), fMode = $("#f-mode"), count = $("#count"), empty = $("#empty");
   const modal = $("#modal"), body = $("#modal-body");
-  let view = "upcoming";
+  let view = "upcoming", autoPast = false;
+  const hint = document.createElement("p");
+  hint.className = "count"; hint.hidden = true;
+  hint.textContent = "No upcoming events right now, showing past events.";
+  count.after(hint);
   const now = () => new Date().toISOString().replace(/\.\d+Z$/, "Z");
 
   function apply() {
@@ -23,14 +27,28 @@
     list.sort((a, b) => view === "past" ? b.dataset.start.localeCompare(a.dataset.start) : a.dataset.start.localeCompare(b.dataset.start))
       .forEach((el) => grid.appendChild(el));
     count.textContent = `${shown} event${shown === 1 ? "" : "s"} · times in utc`;
-    if (tiles.length) { empty.hidden = shown > 0; empty.textContent = "No events match."; }
+    if (tiles.length) {
+      empty.hidden = shown > 0;
+      empty.replaceChildren();
+      const filtered = q.value.trim() || fType.value || fMode.value;
+      const hasPast = tiles.some((el) => el.dataset.end < t);
+      if (view === "upcoming" && !filtered && hasPast) {
+        empty.append("No upcoming events. ");
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "btn ghost"; b.textContent = "Show past events";
+        b.addEventListener("click", () => setView("past"));
+        empty.append(b);
+      } else empty.textContent = "No events match.";
+    }
+    hint.hidden = !(autoPast && view === "past");
   }
 
-  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => {
-    view = b.dataset.view;
-    document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  function setView(v, { auto = false } = {}) {
+    view = v; autoPast = auto;
+    document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.view === v)));
     apply();
-  }));
+  }
+  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
   [q, fType, fMode].forEach((el) => el.addEventListener("input", apply));
 
   // modal: opened by clicking a tile, deep-linkable via #<uuid>
@@ -57,11 +75,13 @@
     const id = location.hash.slice(1);
     if (id && open(id, false)) {
       const t = document.getElementById("tile-" + id);
-      if (t && t.hidden) { view = "all"; document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.view === "all"))); apply(); }
+      if (t && t.hidden) setView("all");
     } else closeModal();
   }
   addEventListener("popstate", route);
   addEventListener("hashchange", route);
-  apply();
+  // no upcoming events but past ones: start on the past view
+  { const t = now();
+    if (tiles.length && !tiles.some((el) => el.dataset.end >= t)) setView("past", { auto: true }); else apply(); }
   route();
 })();
