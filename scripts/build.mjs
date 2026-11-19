@@ -77,6 +77,10 @@ const byMod = [...events].sort((a, b) => mod(b).localeCompare(mod(a)));
 write("feed.xml", `<?xml version="1.0" encoding="utf-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n<title>${esc(SITE_NAME)}</title>\n<subtitle>${esc(INTRO)}</subtitle>\n<id>${SITE_URL}/</id>\n<link href="${SITE_URL}/"/>\n<link rel="self" href="${SITE_URL}/feed.xml"/>\n<updated>${byMod[0] ? mod(byMod[0]) : now}</updated>\n` +
   byMod.map((e) => `<entry><id>urn:uuid:${e.id}</id><title>${esc((e.status === "scheduled" ? "" : e.status.toUpperCase() + ": ") + e.name)}</title><link href="${eventUrl(e)}"/><updated>${mod(e)}</updated><summary>${esc(e.summary)} (${e.start} UTC)</summary></entry>`).join("\n") + "\n</feed>\n");
 
+const rfc822 = (iso) => new Date(iso).toUTCString();
+write("rss.xml", `<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n<title>${esc(SITE_NAME)}</title>\n<link>${SITE_URL}/</link>\n<description>${esc(INTRO)}</description>\n<language>en</language>\n<lastBuildDate>${rfc822(byMod[0] ? mod(byMod[0]) : now)}</lastBuildDate>\n<atom:link href="${SITE_URL}/rss.xml" rel="self" type="application/rss+xml"/>\n` +
+  byMod.map((e) => `<item><title>${esc((e.status === "scheduled" ? "" : e.status.toUpperCase() + ": ") + e.name)}</title><link>${eventUrl(e)}</link><guid isPermaLink="false">urn:uuid:${e.id}:${e.revision || 0}</guid><pubDate>${rfc822(mod(e))}</pubDate><category>${esc(e.type)}</category><description>${esc(e.summary + " (" + e.start.replace("T", " ").slice(0, 16) + " UTC" + (e.status === "scheduled" ? "" : ", " + e.status) + ")")}</description></item>`).join("\n") + "\n</channel>\n</rss>\n");
+
 write("404.html", `<!doctype html><meta charset="utf-8"><title>Not found</title><link rel="stylesheet" href="/assets/style.css"><body class="page"><main class="detail-page"><h1>not found</h1><p><a href="/">all events</a></p></main>`);
 if (SITE_URL.startsWith("https://events.outerfab.com")) write("CNAME", "events.outerfab.com\n");
 write(".nojekyll", "");

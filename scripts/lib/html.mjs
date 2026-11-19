@@ -109,6 +109,7 @@ const head = ({ title, desc, canonical, base, ld, extra = "" }) => `<!doctype ht
 <link rel="canonical" href="${esc(canonical)}">
 <link rel="icon" href="${base}assets/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="text/calendar" title="All events (iCalendar)" href="${base}events.ics">
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="${base}rss.xml">
 <link rel="alternate" type="application/atom+xml" title="Atom feed" href="${base}feed.xml">
 <link rel="alternate" type="text/plain" title="llms.txt" href="${base}llms.txt">
 <meta property="og:site_name" content="${esc(SITE_NAME)}">
@@ -122,10 +123,10 @@ ${extra}${ld}
 
 const top = (base) => `<header class="top"><a class="brand" href="${base || "./"}" aria-label="${esc(SITE_NAME)}">${LOGO_INLINE}</a>
 <span class="crumb">open source silicon events</span>
-<nav><a href="${REPO_URL}/issues/new?template=event.yml" rel="noopener">submit an event</a><a href="${base}speakers/">speakers</a><a href="${base}events.ics">subscribe</a><a href="${base}llms.txt">llms.txt</a><a href="${REPO_URL}" rel="noopener">github</a></nav></header>`;
+<nav><a href="${REPO_URL}/issues/new?template=event.yml" rel="noopener">submit an event</a><a href="${base}speakers/">speakers</a><a href="${base}events.ics">subscribe</a><a href="${base}rss.xml">rss</a><a href="${base}llms.txt">llms.txt</a><a href="${REPO_URL}" rel="noopener">github</a></nav></header>`;
 
 const foot = (base) => `<footer class="foot"><p>All times are UTC. Event data is CC0, curated in the <a href="${REPO_URL}" rel="noopener">open repository</a>. Maintained by <a href="https://outerfab.com" rel="noopener">outerfab</a>.</p>
-<p><a href="${base}events.ics">events.ics</a> · <a href="${base}events.json">events.json</a> · <a href="${base}events.jsonld">events.jsonld</a> · <a href="${base}feed.xml">feed.xml</a> · <a href="${base}llms.txt">llms.txt</a> · <a href="${base}schema/event.schema.json">schema</a></p></footer>`;
+<p><a href="${base}events.ics">events.ics</a> · <a href="${base}events.json">events.json</a> · <a href="${base}events.jsonld">events.jsonld</a> · <a href="${base}rss.xml">rss.xml</a> · <a href="${base}feed.xml">feed.xml</a> · <a href="${base}llms.txt">llms.txt</a> · <a href="${base}schema/event.schema.json">schema</a></p></footer>`;
 
 let LOGO_INLINE = "";
 export const setLogo = (svg) => { LOGO_INLINE = svg.replace(/<\?xml[^>]*\?>/, "").trim(); };

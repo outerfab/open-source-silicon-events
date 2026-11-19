@@ -77,6 +77,7 @@ export function llmsTxt(events, now, speakers = []) {
     `- [events.json](${SITE_URL}/events.json): all events as one JSON array`,
     `- [events.jsonld](${SITE_URL}/events.jsonld): schema.org ItemList of all events`,
     `- [events.ics](${SITE_URL}/events.ics): iCalendar feed of all events (subscribe in Apple, Google or any calendar app)`,
+    `- [rss.xml](${SITE_URL}/rss.xml): RSS 2.0 feed`,
     `- [feed.xml](${SITE_URL}/feed.xml): Atom feed`,
     `- [event.schema.json](${SITE_URL}/schema/event.schema.json): JSON Schema of an event`,
     `- [sitemap.xml](${SITE_URL}/sitemap.xml)`, "",

@@ -20,7 +20,7 @@ Live at **https://events.outerfab.com** (GitHub Pages). Maintained by [Outerfab]
 | `/events.ics` | Subscribable calendar of all events |
 | `/events.json`, `/events.jsonld` | All events in one file |
 | `/llms.txt`, `/llms-full.txt` | Index and full text for LLMs |
-| `/feed.xml`, `/sitemap.xml` | Atom feed, sitemap |
+| `/rss.xml`, `/feed.xml`, `/sitemap.xml` | RSS 2.0 feed, Atom feed, sitemap |
 | `/schema/event.schema.json` | JSON Schema |
 
 Everything is generated from the files in `events/`. Nothing in the output is written by hand.
