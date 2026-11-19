@@ -7,7 +7,7 @@
   "additionalProperties": false,
   "required": [
     "id", "name", "summary", "type", "status", "mode",
-    "start", "end", "timezone", "url", "organizers", "languages",
+    "start", "end", "timezone", "url", "organizers", "responsibleOrganizer", "languages",
     "price", "source", "lastVerified"
   ],
   "properties": {
@@ -133,6 +133,15 @@
           "name": { "type": "string", "maxLength": 140 },
           "url": { "type": "string", "format": "uri", "pattern": "^https?://" }
         }
+      }
+    },
+    "responsibleOrganizer": {
+      "description": "The one person who is personally responsible for this event. Public name and optional public page only; no e-mail address or phone number.",
+      "type": "object", "additionalProperties": false, "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "maxLength": 140 },
+        "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+        "role": { "type": "string", "maxLength": 140 }
       }
     },
     "speakers": {

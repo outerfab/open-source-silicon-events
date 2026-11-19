@@ -36,7 +36,7 @@ const icsBtn = (e, base, cls = "") => `<a class="btn ${cls}" href="${base}events
 
 /** One tile in the overview. */
 export function tile(e) {
-  const search = [e.name, e.summary, e.type, e.mode, e.topics?.join(" "), e.series, e.location?.address.locality, e.location?.address.country, e.organizers.map((o) => o.name).join(" ")].filter(Boolean).join(" ").toLowerCase();
+  const search = [e.name, e.summary, e.type, e.mode, e.topics?.join(" "), e.series, e.location?.address.locality, e.location?.address.country, e.organizers.map((o) => o.name).join(" "), e.responsibleOrganizer.name].filter(Boolean).join(" ").toLowerCase();
   return `<article class="tile s-${e.status}" id="tile-${e.id}" data-id="${e.id}" data-start="${e.start}" data-end="${e.end}" data-type="${e.type}" data-mode="${e.mode}" data-status="${e.status}" data-search="${esc(search)}">
 ${banner(e)}
 <div class="tile-body">
@@ -80,6 +80,7 @@ ${row("price", price + (e.price.note ? `<br>${esc(e.price.note)}` : ""))}
 ${row("capacity", e.capacity ? String(e.capacity) : "")}
 ${row("languages", esc(e.languages.join(", ")))}
 ${row("organizers", e.organizers.map((o) => o.url ? link(o.url, o.name) : esc(o.name)).join(", "))}
+${row("responsible", (e.responsibleOrganizer.url ? link(e.responsibleOrganizer.url, e.responsibleOrganizer.name) : esc(e.responsibleOrganizer.name)) + (e.responsibleOrganizer.role ? ` (${esc(e.responsibleOrganizer.role)})` : ""))}
 ${row("speakers", (e.speakers || []).map((s) => (s.url ? link(s.url, s.name) : esc(s.name)) + (s.affiliation ? ` (${esc(s.affiliation)})` : "")).join(", "))}
 ${row("topics", (e.topics || []).map((t) => `<span class="chip">${esc(t)}</span>`).join(" "))}
 ${row("code of conduct", e.codeOfConductUrl ? link(e.codeOfConductUrl) : "")}

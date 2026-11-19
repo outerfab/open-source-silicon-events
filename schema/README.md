@@ -38,6 +38,7 @@ Times are always UTC with a trailing `Z`: `2026-12-05T09:00:00Z`.
 | `price` | yes | `free` (bool); if not free: `currency` (ISO 4217), `minAmount`, optional `maxAmount`, `note` |
 | `capacity` | no | Integer |
 | `organizers` | yes | List of `{name, url?}` |
+| `responsibleOrganizer` | yes | The one person personally responsible for the event: `{name, url?, role?}`. Public name and optional public page only |
 | `speakers` | no | List of `{name, affiliation?, url?}`. Public names only |
 | `languages` | yes | BCP 47 tags, e.g. `en`, `zh-CN` |
 | `image` | no | `{url (https), alt}` |
@@ -64,7 +65,7 @@ Not enforced, but reuse before inventing: `analog`, `digital`, `rtl`, `verificat
 
 | Output | Source of truth |
 |---|---|
-| `event.jsonld` | schema.org `Event` (`eventStatus`, `eventAttendanceMode`, `previousStartDate`, `Place` or `VirtualLocation`, `Offer`, ...) |
-| `event.ics` | `VEVENT` with UTC times, `STATUS` (`CANCELLED`, `TENTATIVE`, `CONFIRMED`) and `SEQUENCE` = `revision` |
+| `event.jsonld` | schema.org `Event` (`organizer` includes the responsible organizer as a `Person`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `Place` or `VirtualLocation`, `Offer`, ...) |
+| `event.ics` | `VEVENT` with UTC times, `STATUS` (`CANCELLED`, `TENTATIVE`, `CONFIRMED`) and `SEQUENCE` = `revision`; the responsible organizer is named in `DESCRIPTION` (no `ORGANIZER`, which needs an e-mail address) |
 | `event.md`, `llms.txt`, `llms-full.txt` | Markdown for agents |
 | `events/<uuid>/index.html` and the modal | The human view |

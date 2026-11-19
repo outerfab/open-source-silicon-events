@@ -42,6 +42,8 @@ export function eventJsonLd(e, { context = true } = {}) {
   if (e.onlineUrl) locs.push({ "@type": "VirtualLocation", url: e.onlineUrl });
   if (locs.length) j.location = locs.length === 1 ? locs[0] : locs;
   j.organizer = e.organizers.map((o) => ({ "@type": "Organization", name: o.name, ...(o.url && { url: o.url }) }));
+  const r = e.responsibleOrganizer;
+  j.organizer.push({ "@type": "Person", name: r.name, jobTitle: r.role || "Responsible organizer", ...(r.url && { url: r.url }) });
   if (e.speakers?.length) j.performer = e.speakers.map((s) => ({ "@type": "Person", name: s.name, ...(s.affiliation && { affiliation: { "@type": "Organization", name: s.affiliation } }), ...(s.url && { url: s.url }) }));
   j.inLanguage = e.languages.length === 1 ? e.languages[0] : e.languages;
   j.isAccessibleForFree = e.price.free;

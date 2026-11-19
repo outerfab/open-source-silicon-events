@@ -22,7 +22,7 @@ function vevent(e) {
   const status = { cancelled: "CANCELLED", postponed: "TENTATIVE" }[e.status] || "CONFIRMED";
   const prefix = { cancelled: "CANCELLED: ", postponed: "POSTPONED: " }[e.status] || "";
   const note = e.statusNote ? `${e.status.toUpperCase()}: ${e.statusNote}\n\n` : "";
-  const desc = `${note}${e.summary}\n\nTimes are UTC.\n${e.url}\n${eventUrl(e)}`;
+  const desc = `${note}${e.summary}\n\nResponsible organizer: ${e.responsibleOrganizer.name}\n\nTimes are UTC.\n${e.url}\n${eventUrl(e)}`;
   const lines = [
     "BEGIN:VEVENT",
     `UID:${e.id}@${new URL(SITE_URL).hostname}`,

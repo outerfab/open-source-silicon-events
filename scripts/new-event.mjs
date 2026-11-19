@@ -22,7 +22,7 @@ const skeleton = {
   url: "https://example.org/TODO",
   registration: { required: false },
   price: { free: true },
-  organizers: [{ name: "TODO" }], languages: ["en"],
+  organizers: [{ name: "TODO" }], responsibleOrganizer: { name: "TODO" }, languages: ["en"],
   source: { url: "https://example.org/TODO" },
   lastVerified: new Date().toISOString().slice(0, 10)
 };

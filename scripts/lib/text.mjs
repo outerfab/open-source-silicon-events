@@ -33,6 +33,7 @@ export function eventMarkdown(e, { heading = 1 } = {}) {
   L.push(`- **Price:** ${priceText(e.price)}`);
   L.push(`- **Languages:** ${e.languages.join(", ")}`);
   L.push(`- **Organizers:** ${e.organizers.map((o) => o.name).join(", ")}`);
+  L.push(`- **Responsible organizer:** ${e.responsibleOrganizer.name}${e.responsibleOrganizer.role ? ` (${e.responsibleOrganizer.role})` : ""}${e.responsibleOrganizer.url ? ", " + e.responsibleOrganizer.url : ""}`);
   if (e.speakers?.length) L.push(`- **Speakers:** ${e.speakers.map((s) => s.name + (s.affiliation ? ` (${s.affiliation})` : "")).join(", ")}`);
   if (e.topics?.length) L.push(`- **Topics:** ${e.topics.join(", ")}`);
   if (e.series) L.push(`- **Series:** ${e.series}`);
