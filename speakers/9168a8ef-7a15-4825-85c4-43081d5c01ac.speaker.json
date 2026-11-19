@@ -2,7 +2,8 @@
   "id": "9168a8ef-7a15-4825-85c4-43081d5c01ac",
   "name": "Stuart Childs",
   "affiliation": "Outerfab",
-  "bio": "Works with Outerfab, which offers post-fab services such as wire bonding, wafer dicing and testing for small silicon batches.",
+  "role": "Co-founder",
+  "bio": "Co-founder of Outerfab and Production Manager at Tiny Tapeout. Coordinates post-fab work from wafer thinning and dicing to wire bonding, testing and fulfilment.",
   "links": [
     {
       "label": "outerfab",
@@ -10,8 +11,8 @@
     }
   ],
   "source": {
-    "url": "https://outerfab.com",
-    "note": "Outerfab description from its website. The affiliation is as stated by the event organizers; the page does not name him."
+    "url": "https://outerfab.com/events/szoss/",
+    "note": "Speaker description on the SZOSS #1 event page."
   },
   "lastVerified": "2026-11-19"
 }

@@ -2,8 +2,8 @@
   "id": "e92aa9be-6beb-4296-bda7-d49739a84601",
   "name": "Tim Ansell",
   "affiliation": "wafer.space",
-  "role": "Founder and leader",
-  "bio": "Founder and leader of wafer.space. Known on GitHub as mithro.",
+  "role": "Founder",
+  "bio": "Founder of wafer.space. Previously worked at Google on the SkyWater SKY130 open PDK and the Open MPW shuttle programme, and founded SymbiFlow (now F4PGA).",
   "links": [
     {
       "label": "website",
@@ -15,8 +15,8 @@
     }
   ],
   "source": {
-    "url": "https://github.com/mithro",
-    "note": "Public GitHub profile (bio, name, website)."
+    "url": "https://outerfab.com/events/szoss/",
+    "note": "Speaker description on the SZOSS #1 event page."
   },
   "lastVerified": "2026-11-19"
 }
