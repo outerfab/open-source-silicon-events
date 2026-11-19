@@ -38,6 +38,8 @@ below it, the local time at the event (from the event's IANA `timezone`).
 Changes, reschedules and cancellations use the form "Change, reschedule or cancel an event" (labels `event`, `event-update`).
 A changed event keeps its UUID and stays on the site. It is marked with a **red bar across the whole tile**, and the old date is struck through.
 
+Every event names one **responsible organizer** (`responsibleOrganizer`: a person's public name, optionally a public URL and role; never an e-mail address or phone number).
+
 Letting an agent do it: tell it "add this event" and give it the issue number or the link. `AGENTS.md` tells it which questions to ask you and how to write the file.
 
 Field reference and rules: [schema/README.md](schema/README.md).

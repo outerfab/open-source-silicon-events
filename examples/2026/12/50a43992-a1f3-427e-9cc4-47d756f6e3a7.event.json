@@ -18,6 +18,9 @@
       "url": "https://example.org"
     }
   ],
+  "responsibleOrganizer": {
+    "name": "Jordan Demo"
+  },
   "registration": {
     "required": true,
     "url": "https://example.org/meetup-1/register",

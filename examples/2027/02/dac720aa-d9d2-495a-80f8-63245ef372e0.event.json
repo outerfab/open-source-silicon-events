@@ -23,6 +23,9 @@
       "url": "https://example.org"
     }
   ],
+  "responsibleOrganizer": {
+    "name": "Taylor Test"
+  },
   "registration": {
     "required": true,
     "url": "https://example.org/conf/tickets",

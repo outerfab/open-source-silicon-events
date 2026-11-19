@@ -18,6 +18,9 @@
       "url": "https://example.org"
     }
   ],
+  "responsibleOrganizer": {
+    "name": "Alex Example"
+  },
   "registration": {
     "required": false
   },

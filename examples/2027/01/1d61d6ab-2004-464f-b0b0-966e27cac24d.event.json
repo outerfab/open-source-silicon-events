@@ -18,6 +18,9 @@
       "url": "https://example.org"
     }
   ],
+  "responsibleOrganizer": {
+    "name": "Morgan Mock"
+  },
   "registration": {
     "required": false
   },

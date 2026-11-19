@@ -18,6 +18,9 @@
       "url": "https://example.org"
     }
   ],
+  "responsibleOrganizer": {
+    "name": "Robin Placeholder"
+  },
   "registration": {
     "required": false
   },

@@ -36,17 +36,18 @@ Changes, reschedules and cancellations arrive with the labels `event` and `event
    3. When does it start and end, in which local time zone, and where is that time zone (IANA name)? (You convert to UTC and read it back.)
    4. In person, online or hybrid? In person/hybrid: venue name, city, country, optionally street, postal code and coordinates. Online/hybrid: the join URL.
    5. Who organizes it (name and URL)?
-   6. What language(s) is it held in?
-   7. What does it cost? Free, or currency and min/max amount.
-   8. Where was this information verified (URL)? That becomes `source`.
-   9. Write a summary of one or two sentences (20–280 characters). Propose one, let the user correct it.
+   6. Who is personally responsible for this event? (Public name, optional public URL and role. Exactly one person.)
+   7. What language(s) is it held in?
+   8. What does it cost? Free, or currency and min/max amount.
+   9. Where was this information verified (URL)? That becomes `source`.
+   10. Write a summary of one or two sentences (20–280 characters). Propose one, let the user correct it.
 
    **Ask, but optional**
-   10. Is registration required? Link, opening and closing time (UTC).
-   11. Is there a call for proposals? Link and deadline (UTC).
-   12. Speakers (public names, affiliation), series name, capacity, code of conduct URL, other pages of the same event (`sameAs`), image URL with alt text.
-   13. Topics as kebab-case tags (see `schema/README.md`).
-   14. A longer description (plain text, paragraphs separated by a blank line).
+   11. Is registration required? Link, opening and closing time (UTC).
+   12. Is there a call for proposals? Link and deadline (UTC).
+   13. Speakers (public names, affiliation), series name, capacity, code of conduct URL, other pages of the same event (`sameAs`), image URL with alt text.
+   14. Topics as kebab-case tags (see `schema/README.md`).
+   15. A longer description (plain text, paragraphs separated by a blank line).
 
 3. Create the file: `npm run new-event -- <start-utc>` prints the new UUID and path and writes a skeleton. Fill it in. Remove the `TODO` placeholders.
 4. `npm run validate`, then `npm run preview` and look at the result if you can.

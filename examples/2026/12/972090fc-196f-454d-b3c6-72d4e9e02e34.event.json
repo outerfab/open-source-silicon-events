@@ -18,6 +18,9 @@
       "url": "https://example.org"
     }
   ],
+  "responsibleOrganizer": {
+    "name": "Casey Fictional"
+  },
   "registration": {
     "required": false
   },

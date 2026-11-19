@@ -55,6 +55,12 @@ body:
     attributes: { label: Organizers (name and URL) }
     validations: { required: true }
   - type: input
+    id: responsible
+    attributes:
+      label: Who is personally responsible for this event?
+      description: Public name and, if there is one, a public page. No e-mail address or phone number.
+    validations: { required: true }
+  - type: input
     id: languages
     attributes: { label: Language(s), placeholder: "en" }
     validations: { required: true }
