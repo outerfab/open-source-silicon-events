@@ -1,0 +1,20 @@
+{
+  "id": "700a051b-ac2e-4626-8ac5-fc489e918632",
+  "name": "Chen Placeholder",
+  "role": "Independent designer",
+  "bio": "Fictional speaker for layout previews. Has a profile only so the page shows a card without an affiliation.",
+  "links": [
+    {
+      "label": "website",
+      "url": "https://example.org/chen"
+    }
+  ],
+  "topics": [
+    "digital",
+    "rtl"
+  ],
+  "source": {
+    "url": "https://example.org/speakers"
+  },
+  "lastVerified": "2026-11-19"
+}

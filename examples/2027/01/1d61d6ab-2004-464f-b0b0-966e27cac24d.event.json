@@ -55,5 +55,14 @@
     }
   },
   "url": "https://example.org/packaging",
-  "id": "1d61d6ab-2004-464f-b0b0-966e27cac24d"
+  "id": "1d61d6ab-2004-464f-b0b0-966e27cac24d",
+  "speakers": [
+    {
+      "speakerId": "2160ff40-77a1-4df8-be75-ad615007c5d7"
+    },
+    {
+      "speakerId": "700a051b-ac2e-4626-8ac5-fc489e918632",
+      "talk": "Another imaginary talk"
+    }
+  ]
 }

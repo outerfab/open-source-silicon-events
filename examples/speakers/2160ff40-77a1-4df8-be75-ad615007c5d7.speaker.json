@@ -1,0 +1,21 @@
+{
+  "id": "2160ff40-77a1-4df8-be75-ad615007c5d7",
+  "name": "Ada Example",
+  "affiliation": "Example Labs",
+  "role": "Researcher",
+  "bio": "Fictional speaker for layout previews. Works on imaginary analog layout tools and has never given a real talk.",
+  "links": [
+    {
+      "label": "website",
+      "url": "https://example.org/ada"
+    }
+  ],
+  "topics": [
+    "analog",
+    "pdk"
+  ],
+  "source": {
+    "url": "https://example.org/speakers"
+  },
+  "lastVerified": "2026-11-19"
+}

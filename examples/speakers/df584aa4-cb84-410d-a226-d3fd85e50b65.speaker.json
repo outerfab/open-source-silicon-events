@@ -1,0 +1,21 @@
+{
+  "id": "df584aa4-cb84-410d-a226-d3fd85e50b65",
+  "name": "Bo Sample",
+  "affiliation": "Sample Foundry Club",
+  "role": "Community lead",
+  "bio": "Fictional speaker for layout previews. Organizes pretend shuttle runs for hobbyists.",
+  "links": [
+    {
+      "label": "website",
+      "url": "https://example.org/bo"
+    }
+  ],
+  "topics": [
+    "mpw",
+    "community"
+  ],
+  "source": {
+    "url": "https://example.org/speakers"
+  },
+  "lastVerified": "2026-11-19"
+}

@@ -30,7 +30,7 @@ jobs:
       - name: Build site
         run: npm run build
       - name: Validate the preview examples
-        run: EVENTS_DIR=examples npm run validate
+        run: EVENTS_DIR=examples SPEAKERS_DIR=examples/speakers npm run validate
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

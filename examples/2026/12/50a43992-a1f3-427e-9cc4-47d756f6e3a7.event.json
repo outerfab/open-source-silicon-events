@@ -58,9 +58,15 @@
   "url": "https://example.org/meetup-1",
   "speakers": [
     {
-      "name": "Ada Example",
-      "affiliation": "Example Labs",
-      "url": "https://example.org/ada"
+      "speakerId": "2160ff40-77a1-4df8-be75-ad615007c5d7",
+      "talk": "An imaginary talk on analog layout"
+    },
+    {
+      "speakerId": "df584aa4-cb84-410d-a226-d3fd85e50b65"
+    },
+    {
+      "name": "Inline Person",
+      "affiliation": "No Profile Inc."
     }
   ],
   "capacity": 60,

@@ -7,7 +7,7 @@
   "scripts": {
     "validate": "node scripts/build.mjs --validate-only",
     "build": "node scripts/build.mjs",
-    "preview": "EVENTS_DIR=examples SITE_URL=http://localhost:8080 node scripts/build.mjs && node scripts/serve.mjs dist 8080",
+    "preview": "EVENTS_DIR=examples SPEAKERS_DIR=examples/speakers SITE_URL=http://localhost:8080 node scripts/build.mjs && node scripts/serve.mjs dist 8080",
     "new-event": "node scripts/new-event.mjs"
   },
   "engines": { "node": ">=20" },
