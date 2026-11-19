@@ -15,6 +15,8 @@ Live at **https://events.outerfab.com** (GitHub Pages). Maintained by [Outerfab]
 | `/events/<uuid>/event.json` | The source JSON |
 | `/events/<uuid>/event.ics` | Calendar file for Apple Calendar, Google Calendar, Outlook |
 | `/events/<uuid>/event.md` | Markdown rendition, for agents |
+| `/speakers/` | Speaker profiles (cards, anchors `#<uuid>`), with the events each speaker is listed at |
+| `/speakers.json`, `/speakers/<uuid>.json`, `/speakers/<uuid>.jsonld` | All speakers, one speaker, canonical schema.org `Person` JSON-LD |
 | `/events.ics` | Subscribable calendar of all events |
 | `/events.json`, `/events.jsonld` | All events in one file |
 | `/llms.txt`, `/llms-full.txt` | Index and full text for LLMs |
@@ -41,6 +43,12 @@ A changed event keeps its UUID and stays on the site. It is marked with a **red 
 Every event names one **responsible organizer** (`responsibleOrganizer`: a person's public name, optionally a public URL and role; never an e-mail address or phone number).
 
 Letting an agent do it: tell it "add this event" and give it the issue number or the link. `AGENTS.md` tells it which questions to ask you and how to write the file.
+
+## Add a speaker
+
+Speakers have profiles in `speakers/<uuid>.speaker.json` (flat folder). [Open an issue with the form "New speaker profile"](../../issues/new?template=speaker.yml) (label `speaker`).
+Profiles contain public information only and are published with the speaker's consent. Events reference a profile with `{"speakerId": "<uuid>"}`;
+the build fails if the id does not exist. Events may still list a speaker inline by name.
 
 Field reference and rules: [schema/README.md](schema/README.md).
 

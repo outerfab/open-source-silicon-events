@@ -1,0 +1,22 @@
+{
+  "id": "e92aa9be-6beb-4296-bda7-d49739a84601",
+  "name": "Tim Ansell",
+  "affiliation": "wafer.space",
+  "role": "Founder and leader",
+  "bio": "Founder and leader of wafer.space. Known on GitHub as mithro.",
+  "links": [
+    {
+      "label": "website",
+      "url": "https://mith.ro"
+    },
+    {
+      "label": "github",
+      "url": "https://github.com/mithro"
+    }
+  ],
+  "source": {
+    "url": "https://github.com/mithro",
+    "note": "Public GitHub profile (bio, name, website)."
+  },
+  "lastVerified": "2026-11-19"
+}

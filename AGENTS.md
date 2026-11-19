@@ -45,13 +45,29 @@ Changes, reschedules and cancellations arrive with the labels `event` and `event
    **Ask, but optional**
    11. Is registration required? Link, opening and closing time (UTC).
    12. Is there a call for proposals? Link and deadline (UTC).
-   13. Speakers (public names, affiliation), series name, capacity, code of conduct URL, other pages of the same event (`sameAs`), image URL with alt text.
+   13. Speakers (public names, affiliation; with a profile in `speakers/` if they consent, see "Adding a speaker"), series name, capacity, code of conduct URL, other pages of the same event (`sameAs`), image URL with alt text.
    14. Topics as kebab-case tags (see `schema/README.md`).
    15. A longer description (plain text, paragraphs separated by a blank line).
 
 3. Create the file: `npm run new-event -- <start-utc>` prints the new UUID and path and writes a skeleton. Fill it in. Remove the `TODO` placeholders.
 4. `npm run validate`, then `npm run preview` and look at the result if you can.
 5. Branch `event/<short-slug>`, commit `Add event: <name>`, open a PR whose description contains `Closes #<issue>`. Do not merge.
+
+## Adding a speaker
+
+Speakers live in `speakers/<uuid>.speaker.json` (flat folder, no subfolders), schema `schema/speaker.schema.json`. New ones arrive as issues with the label `speaker` (`.github/ISSUE_TEMPLATE/speaker.yml`).
+**Include a speaker only with public information and with their consent** (the event organizer or the speaker confirms it). Ask in one batch:
+
+1. Full name as the speaker wants it shown, affiliation and role.
+2. Does the speaker agree to a public profile? Who confirmed this?
+3. A short bio of 1–3 factual sentences, from a public source. Never write a bio from guesses or private knowledge. Leave it out if unsure.
+4. Public links (website, GitHub, ...). No e-mail, phone or home address.
+5. Image URL (https) with alt text, topics (optional).
+6. Where was this verified (URL)? That becomes `source`. Set `lastVerified` to today.
+
+Create a UUID v4 (`node -e "console.log(crypto.randomUUID())"`), name the file `<uuid>.speaker.json`, run `npm run validate`.
+In the event, reference the profile as `{"speakerId": "<uuid>", "talk": "..."}`. The build fails on unknown ids.
+The same rules apply as for events: no invented facts, public repo, open a PR and do not merge.
 
 ## Changing an existing event
 
@@ -78,4 +94,5 @@ Files are only deleted for duplicates and spam, and that is a decision for a hum
     npm run build          # builds dist/
     npm run preview        # builds the fictional events in examples/ and serves http://localhost:8080
 
-`examples/` contains fictional events for previewing the layout. They are never published. Do not copy them into `events/`.
+`EVENTS_DIR=examples SPEAKERS_DIR=examples/speakers npm run validate` checks the fictional examples.
+`examples/` contains fictional events and speakers for previewing the layout. They are never published. Do not copy them into `events/`.
