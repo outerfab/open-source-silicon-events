@@ -1,8 +1,9 @@
 {
   "id": "d6201cfd-ae56-489e-aa14-84b297364adb",
   "name": "Stephan Bökelmann",
-  "role": "Physicist, engineer",
-  "bio": "Physicist, engineer and KiCad community contributor. Known on GitHub as MaxClerkwell. His open.cob.json work connects die-layout data with board design.",
+  "affiliation": "Outerfab",
+  "role": "Co-founder",
+  "bio": "Co-founder of Outerfab. Physicist, engineer and KiCad community contributor. Known on GitHub as MaxClerkwell. His open.cob.json work connects die-layout data with board design.",
   "links": [
     {
       "label": "github",
@@ -14,8 +15,8 @@
     }
   ],
   "source": {
-    "url": "https://outerfab.com/events/szoss/",
-    "note": "Speaker description on the SZOSS #1 event page."
+    "url": "https://outerfab.github.io/events/szoss/",
+    "note": "Speaker description on the SZOSS #1 event page. The co-founder role was confirmed by the speaker on 2026-11-23."
   },
-  "lastVerified": "2026-11-19"
+  "lastVerified": "2026-11-23"
 }
