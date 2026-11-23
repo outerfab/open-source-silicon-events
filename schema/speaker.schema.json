@@ -10,6 +10,10 @@
     "$schema": { "type": "string" },
     "id": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", "description": "Lowercase UUID v4. Never changes. Events reference it as speakerId." },
     "name": { "type": "string", "minLength": 2, "maxLength": 140 },
+    "identity": {
+      "description": "Root identity of the speaker: the @id the speaker's own site uses for the person in its structured data, e.g. https://example.org/#person. The profile's JSON-LD then uses this @id instead of minting its own, so all sites describe one entity.",
+      "type": "string", "format": "uri", "pattern": "^https://"
+    },
     "affiliation": { "type": "string", "maxLength": 140 },
     "role": { "type": "string", "maxLength": 140, "description": "Job title or role, e.g. Founder." },
     "bio": { "type": "string", "minLength": 10, "maxLength": 400, "description": "One to three factual sentences, plain text." },

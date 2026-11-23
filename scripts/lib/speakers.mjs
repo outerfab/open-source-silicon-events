@@ -51,7 +51,7 @@ export function resolveSpeakers(events, speakers) {
       const s = byId.get(x.speakerId);
       if (!s) { errors.push(`${e._file}: speakerId ${x.speakerId} does not exist in speakers/`); return []; }
       s._events.push({ event: e, talk: x.talk });
-      return [{ name: s.name, ...(s.affiliation && { affiliation: s.affiliation }), speakerId: s.id, ...(x.talk && { talk: x.talk }) }];
+      return [{ name: s.name, ...(s.affiliation && { affiliation: s.affiliation }), speakerId: s.id, ...(s.identity && { identity: s.identity }), ...(x.talk && { talk: x.talk }) }];
     });
   }
   for (const s of speakers) s._events.sort((a, b) => b.event.start.localeCompare(a.event.start));
@@ -62,7 +62,7 @@ export function speakerJsonLd(s, { context = true } = {}) {
   const j = {};
   if (context) j["@context"] = "https://schema.org";
   j["@type"] = "Person";
-  j["@id"] = speakerUrl(s);
+  j["@id"] = s.identity || speakerUrl(s);
   j.url = speakerUrl(s);
   j.identifier = s.id;
   j.name = s.name;

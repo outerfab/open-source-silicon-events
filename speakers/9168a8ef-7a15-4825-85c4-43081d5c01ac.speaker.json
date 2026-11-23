@@ -1,10 +1,15 @@
 {
   "id": "9168a8ef-7a15-4825-85c4-43081d5c01ac",
   "name": "Stuart Childs",
+  "identity": "https://saladss.github.io/#person",
   "affiliation": "Outerfab",
   "role": "Co-founder",
   "bio": "Co-founder of Outerfab and Production Manager at Tiny Tapeout. Coordinates post-fab work from wafer thinning and dicing to wire bonding, testing and fulfilment.",
   "links": [
+    {
+      "label": "website",
+      "url": "https://saladss.github.io/"
+    },
     {
       "label": "outerfab",
       "url": "https://outerfab.com"
@@ -12,7 +17,7 @@
   ],
   "source": {
     "url": "https://outerfab.com/events/szoss/",
-    "note": "Speaker description on the SZOSS #1 event page."
+    "note": "Speaker description on the SZOSS #1 event page. Identity and website from https://saladss.github.io/."
   },
-  "lastVerified": "2026-11-19"
+  "lastVerified": "2026-11-23"
 }

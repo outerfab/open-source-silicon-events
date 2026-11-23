@@ -46,7 +46,7 @@ export function eventJsonLd(e, { context = true } = {}) {
   const r = e.responsibleOrganizer;
   j.organizer.push({ "@type": "Person", name: r.name, jobTitle: r.role || "Responsible organizer", ...(r.url && { url: r.url }) });
   const sp = e._speakers || e.speakers;
-  if (sp?.length) j.performer = sp.map((s) => ({ "@type": "Person", ...(s.speakerId && { "@id": speakerUrl({ id: s.speakerId }) }), name: s.name, ...(s.affiliation && { affiliation: { "@type": "Organization", name: s.affiliation } }), ...(s.speakerId ? { url: speakerUrl({ id: s.speakerId }) } : s.url && { url: s.url }) }));
+  if (sp?.length) j.performer = sp.map((s) => ({ "@type": "Person", ...(s.speakerId && { "@id": s.identity || speakerUrl({ id: s.speakerId }) }), name: s.name, ...(s.affiliation && { affiliation: { "@type": "Organization", name: s.affiliation } }), ...(s.speakerId ? { url: speakerUrl({ id: s.speakerId }) } : s.url && { url: s.url }) }));
   j.inLanguage = e.languages.length === 1 ? e.languages[0] : e.languages;
   j.isAccessibleForFree = e.price.free;
   const offer = { "@type": "Offer", url: e.registration?.url || e.url, price: e.price.free ? 0 : e.price.minAmount, priceCurrency: e.price.currency || "EUR" };
