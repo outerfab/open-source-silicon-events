@@ -58,6 +58,7 @@ An event lists a speaker either as `{speakerId, talk?}` (reference to a profile,
 |---|---|---|
 | `id` | yes | UUID v4, never changes |
 | `name` | yes | 2–140 characters |
+| `identity` | no | The `@id` the speaker's own site uses for the person, e.g. `https://example.org/#person`. Becomes the `@id` of the generated `Person`, so the calendar and the speaker's site describe one entity |
 | `affiliation`, `role` | no | e.g. `Outerfab`, `Founder` |
 | `bio` | no | 10–400 characters, plain text, 1–3 factual sentences |
 | `links` | no | List of `{label, url}`, public pages only |
